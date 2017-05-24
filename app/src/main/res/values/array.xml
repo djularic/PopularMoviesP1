@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sorting_names_array" translatable = "false">
+        <!--item>mostPopular</item-->
+        <item>Most Popular</item>
+
+        <!-- item>topRated</item -->
+        <item>Top rated</item>
+
+    </string-array>
+
+    <string-array name="sorting_values_array" translatable = "false">
+        <!--item>Most Popular</item-->
+        <item>mostPopular</item>
+
+        <!--item>Top Rated</item-->
+        <item>topRated</item>
+
+    </string-array>
+
+</resources>

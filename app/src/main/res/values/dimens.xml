@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tv_title_height">150dp</dimen>
+    <dimen name="tv_title_padding_left">20dp</dimen>
+    <dimen name="tv_title_text_size">35sp</dimen>
+    <dimen name="iv_poster_margin">15dp</dimen>
+    <dimen name="tv_overview_padding_left">15dp</dimen>
+    <dimen name="tv_overview_padding_right">15dp</dimen>
+    <dimen name="tv_overview_padding_top">0dp</dimen>
+    <dimen name="tv_overview_padding_bottom">15dp</dimen>
+
+</resources>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Popular Movies P1</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_network_available">No network available</string>
+    <string name="menu_main_most_popular">Most popular</string>
+    <string name="menu_main_top_rated">Top rated</string>
+    <string name="menu_main_settings">Settings</string>
+    <string name="list_preference_sorting_mode">Select display mode </string>
+    <string name="list_preference_default_value">mostPopular</string>
+
+    <!-- ListPreference Title -->
+    <string name="list_preference_sort_title">Prefered display</string>
+    <!-- SharedPreferences Keys -->
+    <string name="sp_key_preference_sort">sort</string>
+    <string name="str_title_popular_movies">Popular Movies</string>
+    <string name="str_title_top_rated">Top rated movies</string>
+    <string name="str_sort_most_popular">mostPopular</string>
+    <string name="str_sort_top_rated">topRated</string>
+
+    <string name="title_movie_details">Movie Details</string>
+</resources>
