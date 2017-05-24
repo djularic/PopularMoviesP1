@@ -53,7 +53,7 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
     private final Gson gson = new Gson();
     private static boolean sortByPopularity;
     private String sortPreference;
-    private static final String API_KEY = "YOUR_API_KEY_GOES_HERE";
+    private static final String API_KEY = "YOUR_TMDB_API_KEY_GOES_HERE";
     private static final String URL_TMDB_POPULAR_MOVIES = "http://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY;
     private static final String URL_TMDB_TOP_RATED_MOVIES = "http://api.themoviedb.org/3/movie/top_rated?api_key=" + API_KEY;
     private static int NUM_OF_COLUMNS_SMARTPHONE = 2;
@@ -193,7 +193,6 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
         sortPreference = mSharedPreferences.getString(getString(R.string.sp_key_preference_sort), getString(R.string.str_sort_most_popular));
         if(sortPreference.equals(getString(R.string.str_sort_most_popular))){
             getActivity().setTitle(getString(R.string.str_title_popular_movies));
-            //Toast.makeText(mContext, sortPreference, Toast.LENGTH_SHORT).show();
             sortByPopularity = true;
         }
         else if (sortPreference.equals(getString(R.string.str_sort_top_rated))){
