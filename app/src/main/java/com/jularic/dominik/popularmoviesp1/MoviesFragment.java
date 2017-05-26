@@ -79,7 +79,6 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
 
         screenWidth = size.x/NUM_OF_COLUMNS_SMARTPHONE;
 
-
         if(getActivity()!=null){
             setupSharedPreferences();
             mProgressBar = (ProgressBar) rootView.findViewById(R.id.pb_fragment_movies);
