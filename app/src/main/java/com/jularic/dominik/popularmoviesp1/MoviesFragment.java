@@ -108,9 +108,6 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
                 mTextViewNoConnection.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
-            else{
-                //mTextViewNoConnection.setVisibility(View.VISIBLE);
-            }
 
         }
         return rootView;
