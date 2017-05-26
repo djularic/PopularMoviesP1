@@ -20,4 +20,25 @@
     <string name="str_sort_top_rated">topRated</string>
 
     <string name="title_movie_details">Movie Details</string>
+
+    <!-- Strings for text views that use as labels -->
+    <string name="tv_rating_label_text">Rating: </string>
+
+    <!-- Strings preferences display mode names labels-->
+    <string name="pref_display_mode_most_popular_lablel_">Most Popular</string>
+    <string name="pref_display_mode_top_rated_label">Top rated</string>
+
+    <!-- Strings preferences display mode values -->
+    <string name="pref_display_mode_most_popular_value">Most Popular</string>
+    <string name="pref_display_mode_top_rated_value">Most Popular</string>
+
+
+
+    <string name="lp_display_mode_default_value">mostPopular</string>
+    <!-- Strings that are used for development purposes-->
+    <string name="tv_title_develop_text">Guardians of the Galaxy Vol.2</string>
+    <string name="tv_date_develop_text">2017-04-24</string>
+    <string name="tv_overview_develop_text">A live-action adaptation of Disney\'s version of the classic \'Beauty and the Beast\' tale of a cursed prince and a beautiful young woman who helps him break the spell.</string>
+    <string name="tv_rating_develop_text">7.6</string>
+
 </resources>

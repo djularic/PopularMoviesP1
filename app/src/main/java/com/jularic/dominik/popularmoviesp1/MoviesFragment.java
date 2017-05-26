@@ -42,15 +42,14 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
 
     private static final String STATE_MOVIES = "movie_list" ;
     private Context mContext;
-    TextView mTextView;
+    TextView mTextViewNoConnection;
     RecyclerView mRecyclerView;
     AdapterMovies mAdapterMovies;
     GridLayoutManager mGridLayoutManager;
     private ProgressBar mProgressBar;
     private MovieList mMovieList;
     static int screenWidth;
-    private final OkHttpClient okHttpClient = new OkHttpClient();
-    private final Gson gson = new Gson();
+    private final OkHttpClient mOkHttpClient = new OkHttpClient();
     private static boolean sortByPopularity;
     private String sortPreference;
     private static final String API_KEY = "YOUR_TMDB_API_KEY_GOES_HERE";
@@ -79,27 +78,41 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
         display.getSize(size);
 
         screenWidth = size.x/NUM_OF_COLUMNS_SMARTPHONE;
+
+
         if(getActivity()!=null){
             setupSharedPreferences();
             mProgressBar = (ProgressBar) rootView.findViewById(R.id.pb_fragment_movies);
             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_movies);
             mGridLayoutManager = new GridLayoutManager(getContext(), NUM_OF_COLUMNS_SMARTPHONE);
             mRecyclerView.setLayoutManager(mGridLayoutManager);
+            mTextViewNoConnection = (TextView) rootView.findViewById(R.id.tv_network_availabilty);
 
-            if(savedInstanceState != null){
+            mTextViewNoConnection.setVisibility(View.VISIBLE);
+
+            if(savedInstanceState != null ) {
                 mMovieList = savedInstanceState.getParcelable(STATE_MOVIES);
-                mRecyclerView.setAdapter(new AdapterMovies(getContext(), mMovieList, screenWidth));
-                mProgressBar.setVisibility(View.GONE);
-
-            }
-            else {
+                if(mMovieList != null){
+                    mTextViewNoConnection.setVisibility(View.GONE);
+                    mRecyclerView.setAdapter(new AdapterMovies(getContext(), mMovieList, screenWidth));
+                }
+                else{
+                   mTextViewNoConnection.setVisibility(View.VISIBLE);
+                }
+             }
+            else if(isNetworkAvailable()){
                 try {
-                    //set the mMovieList with new data
                     getDataFromTMDBApi(sortByPopularity);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                mTextViewNoConnection.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
             }
+            else{
+                //mTextViewNoConnection.setVisibility(View.VISIBLE);
+            }
+
         }
         return rootView;
     }
@@ -107,6 +120,9 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
     public void getDataFromTMDBApi(boolean sortByPopularity) throws Exception {
 
         String urlForParse;
+        if(isNetworkAvailable()){
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
 
         if(sortByPopularity == true) {
             urlForParse = URL_TMDB_POPULAR_MOVIES;
@@ -121,7 +137,7 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
 
         final Handler mainHandler = new Handler(getContext().getMainLooper());
 
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
             }
@@ -147,15 +163,6 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
     @Override
     public void onStart(){
         super.onStart();
-
-        if(isNetworkAvailable()){
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
-        else{
-            mTextView = (TextView) getActivity().findViewById(R.id.tv_network_availabilty);
-            mTextView.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -203,16 +210,20 @@ public class MoviesFragment extends Fragment implements SharedPreferences.OnShar
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        if(s.equals(getString(R.string.sp_key_preference_sort))){
-
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if(key.equals(getString(R.string.sp_key_preference_sort))){
             setupSharedPreferences();
-            try {
-                getDataFromTMDBApi(sortByPopularity);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            mRecyclerView.setAdapter(mAdapterMovies);
+                if(!isNetworkAvailable()){
+                    mTextViewNoConnection.setVisibility(View.VISIBLE);
+                    mMovieList = null;
+                }
+                try {
+                    getDataFromTMDBApi(sortByPopularity);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mRecyclerView.setAdapter(mAdapterMovies);
+
 
         }
     }

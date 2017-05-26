@@ -12,5 +12,6 @@
     <dimen name="tv_date_padding_right">0dp</dimen>
     <dimen name="tv_date_padding_top">15dp</dimen>
     <dimen name="tc_date_padding_bottom">0dp</dimen>
+    <dimen name="tv_date_text_size">25sp</dimen>
 
 </resources>
